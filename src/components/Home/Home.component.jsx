@@ -13,81 +13,60 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import Paper from "@material-ui/core/Paper";
 
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import FaceIcon from "@material-ui/icons/Face";
+import AddIcon from "@material-ui/icons/Add";
+import Avatar from "@material-ui/core/Avatar";
+
 const Home = ({ currentUser }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       marginTop: "5%",
     },
-    paper: {
-      padding: "5%",
-      height: "60vh",
-      width: "60%",
-      backgroundColor: "#e1d7b8",
-    },
     control: {
       padding: theme.spacing(2),
     },
+    menu: {
+      width: "30%",
+    },
+    avatar: {
+      display: "flex",
+      "& > *": {
+        width: theme.spacing(10),
+        height: theme.spacing(10),
+      },
+    },
   }));
   const classes = useStyles();
-  /*
-  sprawdzenie  wyswietlenie danych
   let user = currentUser;
-  auth.onAuthStateChanged(function (user) {
-    if (user) {
-      console.log(user.displayName);
-      // User is signed in.
-      /*
-      var displayName = user.displayName;
-      var email = user.email;
-      var emailVerified = user.emailVerified;
-      var photoURL = user.photoURL;
-      var isAnonymous = user.isAnonymous;
-      var uid = user.uid;
-      var providerData = user.providerData;
-      // ...
-    } else {
-      // User is signed out.
-      // ...
-    }
-  });*/
-  /* 2 opcja
-  let user = currentUser;
-  let name, email, photoUrl, uid, emailVerified;
-
-  if (user != null) {
-    name = user.displayName;
-    email = user.email;
-    photoUrl = user.photoURL;
-    emailVerified = user.emailVerified;
-    uid = user.uid;
-  }*/
-  /*
-  aktualizowanie danych
-  var user = currentUser;
-  
-  user
-    .updateProfile({
-      displayName: "Jane Q. User",
-      photoURL: "https://example.com/jane-q-user/profile.jpg",
-    })
-    .then(function () {
-      console.log(user.displayName);
-      console.log("Update succesfull");
-      // Update successful.
-    })
-    .catch(function (error) {
-      console.log("Error");
-      // An error happened.
-    });*/
 
   return (
     <div className="home">
-      <h1 style={{ textAlign: "center", marginBottom: "10%" }}>Home Page</h1>
+      <div className={classes.avatar}>
+        <Avatar alt="Remy Sharp" src={user.photoURL} />
+      </div>
       <h2>You are logged in as {`${currentUser.email}`}</h2>
+      {user.displayName ? <h3>Nick: {`${user.displayName}`}</h3> : null}
       <h3>Do you want to add more information to your profile?</h3>
-      <NavLink to="/home/more_informations">
-        <div>Add More Informations</div>
-      </NavLink>
+
+      <a className={classes.menu}>
+        <NavLink to="/home/more_informations">
+          <BottomNavigationAction
+            label="Recents"
+            value="recents"
+            icon={<AddIcon />}
+          />
+        </NavLink>
+        <NavLink to="/home/more_informationsPhoto">
+          <BottomNavigationAction
+            label="Favorites"
+            value="favorites"
+            icon={<FaceIcon />}
+          />
+        </NavLink>
+      </a>
+
       <Button
         variant="outlined"
         style={{

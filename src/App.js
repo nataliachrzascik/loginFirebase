@@ -6,7 +6,6 @@ import Home from './components/Home/Home.component';
 import SignIn from './components/SignIn/SignIn.component';
 import SignUp from './components/SignUp/SignUp.component';
 import MoreInformations from './components/Home/MoreInformations.component';
-import Informations from './components/Home/Informations.component';
 import { auth } from './configs/firebase.config';
 import { setCurrentUser, clearCurrentUser } from './redux/auth/auth.actions';
 
@@ -20,6 +19,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import Paper from "@material-ui/core/Paper";
+import MoreInformationsPhoto from './components/Home/MoreInformationsPhoto';
 
 
 
@@ -47,7 +47,7 @@ function App({ currentUser, setCurrentUser, clearCurrentUser }) {
     },
     paper: {
       padding: '5%',
-      height: "60vh",
+      height: "130vh",
       width: "40%",
       backgroundColor: '#f7e5c4'
     },
@@ -56,10 +56,6 @@ function App({ currentUser, setCurrentUser, clearCurrentUser }) {
     },
   }));
   const classes = useStyles();
-  /*
-  {/*
-        <Route exact path="/more_informations" component={MoreInformations} />
-        }*/
   return (
     <div className="app">
 
@@ -71,8 +67,9 @@ function App({ currentUser, setCurrentUser, clearCurrentUser }) {
               <Grid container justify="center">
                 <Paper className={classes.paper}>
                   <Route path="/home" component={Home} />
+
                   <Route exact path="/home/more_informations" component={MoreInformations} />
-                  <Route exact path="/home/informations" component={Informations} />
+                  <Route exact path="/home/more_informationsPhoto" component={MoreInformationsPhoto} />
                 </Paper>
               </Grid>
             </Grid>
